@@ -1,0 +1,24 @@
+:host {
+  display: block;
+}
+
+.page {
+  background: #ffffff;
+  border: 1px solid #d1d5db;
+  border-radius: 14px;
+  padding: 1rem;
+}
+
+.cards {
+  margin-top: 1rem;
+  display: grid;
+  gap: 0.8rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+article {
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  padding: 0.8rem;
+  background: #f9fafb;
+}

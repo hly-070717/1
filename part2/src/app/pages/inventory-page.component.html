@@ -1,0 +1,75 @@
+<!--
+  Author: Your Name
+  Assessment Part: Part 2 - Basic Angular Inventory Application
+-->
+<section class="page">
+  <h1>库存管理</h1>
+  <p [class]="'notice ' + tone">{{ message }}</p>
+
+  <div class="grid-form">
+    <label>编号（唯一）<input [(ngModel)]="form.id" type="text" /></label>
+    <label>名称<input [(ngModel)]="form.name" type="text" /></label>
+    <label>
+      类别
+      <select [(ngModel)]="form.category">
+        @for (category of inventoryService.categories; track category) {
+          <option [value]="category">{{ category }}</option>
+        }
+      </select>
+    </label>
+    <label>数量<input [(ngModel)]="form.quantity" type="number" min="0" /></label>
+    <label>价格<input [(ngModel)]="form.price" type="number" min="0" /></label>
+    <label>供应商<input [(ngModel)]="form.supplier" type="text" /></label>
+    <label>
+      库存状态
+      <select [(ngModel)]="form.stockStatus">
+        @for (state of inventoryService.stockStates; track state) {
+          <option [value]="state">{{ state }}</option>
+        }
+      </select>
+    </label>
+    <label class="check"><input [(ngModel)]="form.isPopular" type="checkbox" /> 热门物品</label>
+    <label class="full-row">评论（可选）<textarea [(ngModel)]="form.comments" rows="2"></textarea></label>
+  </div>
+
+  <div class="toolbar">
+    <button type="button" (click)="addItem()">新增</button>
+    <button type="button" class="secondary" (click)="showAll()">显示全部</button>
+    <button type="button" class="secondary" (click)="showPopular()">显示热门</button>
+  </div>
+
+  <div class="ops">
+    <label>更新目标名称<input [(ngModel)]="updateTargetName" type="text" /></label>
+    <button type="button" (click)="updateByName()">按名称更新</button>
+  </div>
+  <div class="ops">
+    <label>删除目标名称<input [(ngModel)]="deleteTargetName" type="text" /></label>
+    <button type="button" class="danger" (click)="deleteByName()">按名称删除</button>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>编号</th><th>名称</th><th>类别</th><th>数量</th><th>价格</th><th>供应商</th><th>状态</th><th>热门</th><th>评论</th><th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (item of items; track item.id) {
+          <tr>
+            <td>{{ item.id }}</td>
+            <td>{{ item.name }}</td>
+            <td>{{ item.category }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>{{ item.price }}</td>
+            <td>{{ item.supplier }}</td>
+            <td>{{ item.stockStatus }}</td>
+            <td>{{ item.isPopular ? '是' : '否' }}</td>
+            <td>{{ item.comments || '无' }}</td>
+            <td><button type="button" class="ghost" (click)="loadToForm(item.name)">载入</button></td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</section>

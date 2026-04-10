@@ -1,0 +1,16 @@
+:host {
+  display: block;
+}
+
+.page {
+  border: 1px solid #d1d5db;
+  border-radius: 14px;
+  padding: 1rem;
+  background: #ffffff;
+}
+
+ul {
+  margin: 0.6rem 0 0;
+  padding-left: 1.1rem;
+  line-height: 1.5;
+}

@@ -1,0 +1,44 @@
+<!--
+  Author: Your Name
+  Assessment Part: Part 2 - Basic Angular Inventory Application
+-->
+<section class="page">
+  <h1>搜索与筛选</h1>
+  <div class="filters">
+    <label>名称关键字<input [(ngModel)]="keyword" type="text" /></label>
+    <label>
+      类别
+      <select [(ngModel)]="category">
+        <option value="">全部</option>
+        @for (item of inventoryService.categories; track item) {
+          <option [value]="item">{{ item }}</option>
+        }
+      </select>
+    </label>
+    <label>
+      库存状态
+      <select [(ngModel)]="stockStatus">
+        <option value="">全部</option>
+        @for (status of inventoryService.stockStates; track status) {
+          <option [value]="status">{{ status }}</option>
+        }
+      </select>
+    </label>
+    <label class="check"><input [(ngModel)]="onlyPopular" type="checkbox" /> 仅热门</label>
+  </div>
+
+  <div class="actions">
+    <button type="button" (click)="applyFilter()">应用筛选</button>
+    <button type="button" class="secondary" (click)="clearFilter()">清空条件</button>
+  </div>
+
+  <p>结果数量：{{ results.length }}</p>
+  <ul class="result-list">
+    @for (row of results; track row.id) {
+      <li>
+        <strong>{{ row.name }}</strong>
+        <span>{{ row.category }} / {{ row.stockStatus }} / 库存 {{ row.quantity }} / 价格 {{ row.price }}</span>
+      </li>
+    }
+  </ul>
+</section>

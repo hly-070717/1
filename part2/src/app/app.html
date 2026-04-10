@@ -1,0 +1,20 @@
+<!--
+  Author: Your Name
+  Assessment Part: Part 2 - Basic Angular Inventory Application
+-->
+<main class="shell">
+  <header class="topbar">
+    <h1>{{ title }}</h1>
+    <nav>
+      <a routerLink="/home" routerLinkActive="active">主页</a>
+      <a routerLink="/inventory" routerLinkActive="active">库存管理</a>
+      <a routerLink="/search" routerLinkActive="active">搜索筛选</a>
+      <a routerLink="/privacy-security" routerLinkActive="active">隐私安全</a>
+      <a routerLink="/help" routerLinkActive="active">帮助中心</a>
+    </nav>
+  </header>
+
+  <section class="content">
+    <router-outlet></router-outlet>
+  </section>
+</main>

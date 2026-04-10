@@ -1,0 +1,19 @@
+:host {
+  display: block;
+}
+
+.page {
+  border: 1px solid #d1d5db;
+  border-radius: 14px;
+  padding: 1rem;
+  background: #ffffff;
+}
+
+h2 {
+  margin-top: 1rem;
+}
+
+ul {
+  margin: 0.4rem 0 0;
+  padding-left: 1.1rem;
+}
