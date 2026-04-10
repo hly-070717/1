@@ -1,0 +1,137 @@
+<!--
+  Author: Your Name
+  Assessment Part: Part 1 - Basic TypeScript Inventory Application
+-->
+<main class="inventory-shell">
+  <section class="hero-card">
+    <h1>{{ title }}</h1>
+    <p>单页 TypeScript 库存管理系统（内存数据，不做持久化）</p>
+    <div class="message" [class]="'message ' + messageTone" [innerHTML]="messageHtml"></div>
+  </section>
+
+  <section class="panel">
+    <h2>物品表单</h2>
+    <div class="grid-form">
+      <label>
+        物品编号（唯一）
+        <input [(ngModel)]="formModel.id" type="text" placeholder="例如 E1002" />
+      </label>
+      <label>
+        物品名称
+        <input [(ngModel)]="formModel.name" type="text" placeholder="例如 电竞鼠标" />
+      </label>
+      <label>
+        类别
+        <select [(ngModel)]="formModel.category">
+          @for (category of categories; track category) {
+            <option [value]="category">{{ category }}</option>
+          }
+        </select>
+      </label>
+      <label>
+        数量
+        <input [(ngModel)]="formModel.quantity" type="number" min="0" />
+      </label>
+      <label>
+        价格
+        <input [(ngModel)]="formModel.price" type="number" min="0" />
+      </label>
+      <label>
+        供应商
+        <input [(ngModel)]="formModel.supplier" type="text" placeholder="例如 Harvey Supplies" />
+      </label>
+      <label>
+        库存状态
+        <select [(ngModel)]="formModel.stockStatus">
+          @for (state of stockStates; track state) {
+            <option [value]="state">{{ state }}</option>
+          }
+        </select>
+      </label>
+      <label class="check-label">
+        <input [(ngModel)]="formModel.isPopular" type="checkbox" />
+        热门物品
+      </label>
+      <label class="full-row">
+        评论（可选）
+        <textarea [(ngModel)]="formModel.comments" rows="2" placeholder="可留空"></textarea>
+      </label>
+    </div>
+
+    <div class="actions">
+      <button type="button" (click)="addItem()">新增物品</button>
+      <button type="button" class="secondary" (click)="showAllItems()">显示全部</button>
+      <button type="button" class="secondary" (click)="showPopularItems()">显示热门</button>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>按名称更新与删除</h2>
+    <div class="inline-controls">
+      <label>
+        更新目标名称
+        <input [(ngModel)]="updateName" type="text" placeholder="输入要更新的物品名称" />
+      </label>
+      <button type="button" (click)="updateByName()">按名称更新</button>
+    </div>
+    <div class="inline-controls">
+      <label>
+        删除目标名称
+        <input [(ngModel)]="deleteName" type="text" placeholder="输入要删除的物品名称" />
+      </label>
+      <button type="button" class="danger" (click)="deleteByName()">按名称删除</button>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>搜索</h2>
+    <div class="inline-controls">
+      <label>
+        名称关键字
+        <input [(ngModel)]="searchName" type="text" placeholder="输入关键字后搜索" />
+      </label>
+      <button type="button" (click)="searchByName()">搜索</button>
+      <button type="button" class="secondary" (click)="showAllItems()">重置</button>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>库存列表（{{ filteredItems.length }}）</h2>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>编号</th>
+            <th>名称</th>
+            <th>类别</th>
+            <th>数量</th>
+            <th>价格</th>
+            <th>供应商</th>
+            <th>状态</th>
+            <th>热门</th>
+            <th>评论</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (item of filteredItems; track item.id) {
+            <tr>
+              <td>{{ item.id }}</td>
+              <td>{{ item.name }}</td>
+              <td>{{ item.category }}</td>
+              <td>{{ item.quantity }}</td>
+              <td>{{ item.price }}</td>
+              <td>{{ item.supplier }}</td>
+              <td>{{ item.stockStatus }}</td>
+              <td>{{ item.isPopular ? '是' : '否' }}</td>
+              <td>{{ item.comments || '无' }}</td>
+              <td>
+                <button type="button" class="ghost" (click)="fillFormByName(item.name)">载入表单</button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </section>
+</main>
